@@ -1,6 +1,4 @@
-require LambdaCalculus
-
-defmodule KPEX.Main do
+defmodule KPEX.HelloWorld do
   @moduledoc false
 
   use Application

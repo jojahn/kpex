@@ -16,7 +16,7 @@ function = fn x -> x end
 # List and Maps
 list = [1, 2, 3]
 list = list ++ [4]
-list = list -- [3]
+list = list -- [2]
 
 map = %{"hello" => "world"}
 element = map["hello"]

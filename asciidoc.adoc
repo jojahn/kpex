@@ -12,11 +12,13 @@ There are many programming languages. These programming languages can be combine
 
 === Functional Programming
 
-// <Functional Programming Languages Examples>
+Examples for functional programming languages are F#, Haskell and Elixir. 
 
-=== Go
+// <Functional Programming Languages Usescases>
 
-Go is a multi-paradigm programming language. It allows object oriented programming.
+=== What is Go?
+
+Go is a multi-paradigm programming language. It allows object oriented programming. Go is developed by Google.
 
 [quote, https://golang.org]
 ____
@@ -25,20 +27,24 @@ ____
 
 // <Usecases>
 
-=== Elixir
+=== What is Elixir?
 
-In contrast to Go Elixir is a functional programming language. Elixir uses the 
+In contrast to Go Elixir is a pure functional programming language. Elixir uses the Erlang. Erlang libraries can be used in Elixir. This was a key features for the developers
 
 [quote, https://elixir-lang.org]
 ____
 Elixir is a dynamic, functional language designed for building scalable and maintainable applications.
 ____
 
-// <Usecases>
+Elixir has similar use cases to Go.
 
-=== Comparison
+=== Differences
 
-Although Go is not a pure functional language it has many features of functional programming languages. 
+Although Go is not a pure functional language it has many features of functional programming languages. And thus it can be compared with a functional programming language like Elixir.
+
+==== Orthogonal Classifications
+
+Since modern programming languages have features of many types like object orientation or functional programming, programming languages can more differentiated with orthogonal classifications. Just like Go that has C++ background Elixir builds on top of the language Erlang. Various orthogonal classifications are listed in the Table <<_orthogonal_classifications,Orthogonal Classifications>>. 
 
 .Orthogonal Classifications
 |===
@@ -63,6 +69,12 @@ Although Go is not a pure functional language it has many features of functional
 |Platform Independent Bytecode
 |===
 
+Elixir in comparison to Go has dynamic types, meaning it will evaluate types at runtime. The Elixir 
+
+==== Types
+
+Elixir and Go have different types and typing approaches. Elixir for example does not have strict types. Much like languages like coffeescript types in Elixir can be added through annotations or decorators. 
+
 == Functional Programming in Go
 
 === Lambda Calculus
@@ -70,19 +82,19 @@ Although Go is not a pure functional language it has many features of functional
 .lambda_calculus.go
 [source,go]
 ----
-func True(x Function) Function {
+func t(x Function) Function {
 	return func(y Function) Function {
 		return x
 	}
 }
 
-func False(x Function) Function {
+func f(x Function) Function {
 	return func(y Function) Function {
 		return y
 	}
 }
 
-func ID(x Function) Function {
+func i(x Function) Function {
 	return x
 }
 
@@ -96,15 +108,15 @@ func ID(x Function) Function {
 .lambda_calculus.ex
 [source,elixir]
 ----
-true_fn = fn x ->
+t = fn x ->
   fn _y -> x end
 end
 
-false_fn = fn _x ->
+f = fn _x ->
   fn y -> y end
 end
 
-id_fn = fn x -> x end
+i = fn x -> x end
 
 # ...
 ----

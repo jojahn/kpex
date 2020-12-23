@@ -1,7 +1,7 @@
 # Types
 # https://hexdocs.pm/elixir
 
-# Basic
+# Basic Types
 string = "Hello, World!"
 string = "Hello, #{:world}"
 bool = false || true
@@ -11,26 +11,33 @@ atom = :atom
 regex = ~r/\d+/
 date = ~D[2020-08-11]
 time = ~T[23:00:07.001]
-function = fn x -> x end
 
-# List and Maps
+# List, Maps and Tuples
 list = [1, 2, 3]
 list = list ++ [4]
 list = list -- [2]
-
 map = %{"hello" => "world"}
 element = map["hello"]
-
 tuple = {:red, :green, :blue}
 
-# Module
-defmodule CustomModule do
-    @type name :: String
+# Functions
+add = fn a, b -> a + b end
+add.(1, 1)
 
-    @spec greet(name) :: String
-    def greet(x) do
-        "Hello, #{x}"
+# Modules
+defmodule Greeter do
+    @type receiver :: String
+    @type message :: String
+
+    @spec greet(receiver, message) :: String
+    def greet(receiver, message) do
+        combine_greeting(receiver, message)
+    end
+
+    # Private Function
+    defp combine_greeting(receiver, message) do
+        "Hello, #{receiver}\n#{message}"
     end
 end
 
-CustomModule.greet(:World)
+Greeter.greet(:World, "Here is Elixir")

@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 type any interface{}
 type function func(any) any
 
@@ -14,6 +16,6 @@ func square(x any) any {
 }
 
 func main() {
-	compose(square, square)(2)
-	compose(square, square)(0)
+	fmt.Printf("compose(square, square)(2) = %d\n", compose(square, square)(2))
+	fmt.Printf("compose(square, square)(0) = %d", compose(square, square)(0))
 }

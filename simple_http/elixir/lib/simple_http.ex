@@ -1,6 +1,6 @@
-defmodule KPEX do
+defmodule SimpleHttp do
   @moduledoc """
-  Documentation for `KPEX`.
+  Documentation for `Example`.
   """
 
   @doc """
@@ -8,11 +8,11 @@ defmodule KPEX do
 
   ## Examples
 
-      iex> KPEX.hello()
+      iex> Example.hello()
       :world
 
   """
   def hello do
-    IO.puts "Hello, World!"
+    :world
   end
 end

@@ -10,24 +10,22 @@ Jonas Jahns
 
 // To bring order into the chaos of immense amount of programming languages out there ,they can be classified by paradigsm.
 
-There is an immense amount of programming languages out there. Programming languages can be separated into different types based on how programms are developed. An example are object-oriented languages like Java. Other programming languages can be functional and procedural.
-
-The main goal of this arcticle is to compare the concept of functional programming with Go and Elixir. The majority of programming languages share features of other types and are not of a single type. And Elixir and Go are not different. Functional, procedural and object-oriented programming can be done in Elixir and in Go.
+The numerous programming languages can be separated into different paradigms. Examples are object-oriented, procedural and functional programming, all of which can be done in Go and in Elixir: two modern programming languages that have similar usecases. Paradigms define how programms are developed. Many newer programming languages adopted features of other languages and are multi-paradigm. The main goal of this arcticle is to compare Go with Elixir regarding the paradigm of functional programming.
 
 === Functional Programming
 
-Functions in computer science can be understood as systems that take input, do something and then produce outputs. 
+Functions in computer science can be understood as systems that take input, process it and then produce output. 
 
 [quote, https://elixir-lang.org]
 ____
 Functional programming promotes a coding style that helps developers write code that is short, concise, and maintainable.
 ____
 
-Functional Programming is defined by many concepts that differentiate it from other types. One key concept is that functions are first-class citizens. First-class citizens of a programming language are treated equally to primitive types like strings or numbers. Meaning a first-class citizen can be a return type, assigned to variables and passed as arguments to functions. A very helpful concept is annonymous functions that can be directly assigned to a variable without prior declaration. 
+Functional programming is defined by many concepts that differentiate it from other paradigms. One key concept is that functions are first-class citizens. First-class citizens of a programming language are treated equally to primitive types like strings or numbers. This means that a function can be a return type, assigned to variables and passed as arguments to functions. A very helpful concept is annonymous functions that can be directly assigned to a variable without prior declaration. 
 
 Functional programming includes higher-order functions that can be called with a function as an argument, return a function or do both. 
 // <Composition,Closure, Currying, Higher Order>
-The aritity of functions gives information about the number of arguments. Some functional concepts require functions only with arity one or unary. Unary functions are functions that only take one arugment. To implement functions with more arguments currying comes into play. Currying describes
+The arity of functions gives information about the number of arguments. Some functional concepts require functions only with arity one or unary. Unary functions are functions that only take one arugment. To implement functions with more arguments currying comes into play. Currying describes ...
 
 // <What is lazy evaluation?>
 // <Immutable vars>
@@ -35,12 +33,12 @@ The aritity of functions gives information about the number of arguments. Some f
 // <What are side effects?>
 Programming languages that only support some parts of functional programming or are not only functional are called pure. Pure functional programming does not support loops, if-else or switch statements. Instead these types of languages use recursion.
 
-Examples for functional programming languages are F#, Haskell and Elixir. Functional programming languages have the effect of 
+Examples for functional programming languages are F# and Haskell. Functional programming languages have the effect of ...
 // <Functional Programming Languages Usescases>
 
 === Go
 
-Go is a multi-paradigm programming language. It allows object oriented, functional and procedural programming. Go was developed by Google employees in 2009 as an open source programming language. While development of Go compilation times was a key feature. Go itself stems from a C++ background, sharing some similarities. 
+Go is a multi-paradigm programming language. It allows object-oriented, functional and procedural programming. Go was developed by Google employees in 2009 as an open source programming language. In the development of Go compilation times was a key feature. Go itself stems from a C\++ background, sharing some similarities with C++. 
 
 [quote, https://golang.org]
 ____

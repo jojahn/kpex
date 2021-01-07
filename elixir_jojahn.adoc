@@ -21,7 +21,7 @@ ____
 Functional programming promotes a coding style that helps developers write code that is short, concise, and maintainable.
 ____
 
-Functional programming is defined by many concepts that differentiate it from other paradigms. One key concept is that functions are first-class citizens. First-class citizens of a programming language are treated equally to primitive types like strings or numbers. This means that a function can be a return type, assigned to variables and passed as arguments to functions. A very helpful concept is annonymous functions that can be directly assigned to a variable without prior declaration. 
+Functional programming is defined by many concepts that differentiate it from other paradigms. One key concept is that functions are first-class citizens. First-class citizens of a programming language are treated equally to primitive types like strings or numbers. This means that a function can be a return type, assigned to variables and passed as arguments to functions. A very helpful concept is anonymous functions that can be directly assigned to a variable without prior declaration. 
 
 Functional programming includes higher-order functions that can be called with a function as an argument, return a function or do both. 
 // <Composition,Closure, Currying, Higher Order>
@@ -45,11 +45,11 @@ ____
 Go is an open source programming language that makes it easy to build simple, reliable, and efficient software.
 ____
 
-Go is more simple than C\++ since it has less keywords and ditched pointer arithmetic. Go shines as the programming language for the backbone of cloud native stack. It is used in the area of application programming for cloud and the web. Other areas of Go are network and distribiuted systems. Go is used in Webservers and cloud infrastructure. It was not developed as a UI language. But there still exist GTK and QT C++ bindings for it. Go can also be used in embedded devices using the compiler TinyGo which is optimized for microcontrollers.
+Go is more simple than C\++ since it has fewer keywords and has ditched pointer arithmetic. Go shines as the programming language of the backbone of cloud native stack. It is used in the area of application programming for cloud and the web. Other areas of Go are network and distributed systems. Go is used in webservers and cloud infrastructure. It was not developed as a UI language but there still exist GTK and QT C++ bindings for Go. Go can also be used in embedded devices using the compiler TinyGo which is optimized for microcontrollers.
 
 === Elixir
 
-In contrast to Go Elixir is also a multi-paradigm programming language. It was built on top of Erlang, an functional programming language designed for telecommunication backends. Elixir therefore uses the Erlang VM. Erlang libraries can be used in Elixir. This was a key feature for the developers. Elixir is not pure functional since it has features like loops, switches and if-else statements. Even object-oriented programming is possible.
+Elixir is also a multi-paradigm programming language. It was built on top of Erlang, a more functional programming language designed for telecommunication backends. Elixir therefore uses the Erlang VM. Erlang libraries can be used in Elixir. This was a key feature for the developers. Elixir is not pure functional since it has features like loops, switches and if-else statements. Even object-oriented programming is possible.
 
 // <What is OTP, Erlang?>
 
@@ -58,7 +58,7 @@ ____
 Elixir is a dynamic, functional language designed for building scalable and maintainable applications.
 ____
 
-Elixir has similar use cases to Go.
+Elixir has similar usecases to Go.
 // <usecase differences>
 Elixir can also be run on embedded hardware using Nerves which is an IoT platform. 
 // <Area>
@@ -71,7 +71,7 @@ Unlike Go Elixir requires a seperate build tool and package manager. The build t
 [discrete]
 ==== Primitive Types
 
-Before talking about functional programming in Go, let's talk about general types of Go. Go has common datatypes like integers, floating point numbers, strings, arrays and many more. While declaring variable it should be noted that the variable type follows the variable name.
+Go has common datatypes like integers, floating point numbers, strings, arrays and many more. While declaring variables it should be noted that the variable type follows the variable name.
 
 .types.go
 [source,go]
@@ -91,7 +91,7 @@ var Map map[string][]int = make(map[string][]int)
 [discrete]
 ==== Functions
 
-Here is a basic example of function in Go. This function takes two integers and returns the sum. The shortened `func` keyword prefixes a function and the return type follows after the argument list.
+Here is a basic example of a function in Go. This function takes two integers and returns the sum. The shortened `func` keyword prefixes a function and the return type follows after the argument list.
 
 .types.go (functions)
 [source, go]
@@ -103,12 +103,12 @@ func add(a int, b int) int {
 add(2, 2) // == 4
 ----
 
-The casing of the name from a name sets whether it is private or public. Private functions start with a lowercase symbol and cannot be access outside the current file. Go also has interfaces and structs
+The casing of the name sets whether the function is private or public. Private functions start with a lowercase symbol and cannot be accessed outside the current file. Go also has interfaces and structs.
 
 [discrete]
 ==== First-class citizens
 
-Functions as first-class citizens means that functions are treated the same as other natural datatypes and can be stored inside a variable.
+Functions as first-class citizens imply that functions are treated the same as other natural datatypes and can be stored inside a variable.
 
 .first_class_citizens.go
 [source, go]
@@ -119,12 +119,12 @@ var add func(int, int) int = func (a int, b int) int {
 add(2, 2) // == 4
 ----
 
-An annonymous function is stored in the variable add. The call of the annonymous looks exactly the same as the prior defined function using the `func` keyword. 
+An anonymous function is stored in the variable add. The call of the anonymous looks exactly the same as the prior defined function using the `func` keyword. 
 
 [discrete]
 ==== Higher-order functions
 
-Go functions can be higher-order, which can either include a function as a parameter or return a function or do both. The Go programming language does not support Javalike Streams and the functional concepts map, filter and reduce. An example for a custom implementation for a streaming api is given in link:stream/stream.go[stream.go]. Only an extract is provided here. 
+Go functions can be higher-order, which include a function as a parameter, return a function or do both. The Go programming language does not support Javalike streams and the functional concepts map, filter and reduce. An example for a custom implementation for a streaming api is given in link:stream/stream.go[stream.go]. Only an extract is provided here. 
 
 .stream.go
 [source, go]
@@ -136,12 +136,10 @@ func (s StreamImpl) Filter(p func(a interface{}) bool) StreamImpl {
 
 The function `Filter` takes an predicate function as an argument `p` that evaluates if an item of the stream should be skipped. The predicate function is defined by the `func` keyword. This predicate takes an `interface{}` which can be anything and returns a boolean.
 
-Higher-order functions in Go can also return functions 
-
 [discrete]
 ==== Currying
 
-Currying implies that higher-order functions exist and that functions can be returned from other functions. A curried function in Go can be implemented by returning a annonymous function.
+Currying implies that higher-order functions exist and that functions can be returned from other functions. A curried function in Go can be implemented by returning a anonymous function.
 
 .currying.go
 [source, go]
@@ -167,7 +165,7 @@ The curried function `multiplyC` can be called.
 [discrete]
 ==== Composition
 
-With composing functions
+With composing functions ...
 
 .composition.go
 [source, go]
@@ -197,7 +195,7 @@ func main() {
 [discrete]
 ==== Primitive Types
 
-Elixir uses primitive types similar to Go but more simple by skipping on the size option of numbers. Additionally it has atoms. A feature of prolog that was passed over from Erlang to Elixir. Atoms are constant identifiers that have the same value as their name. 
+Before talking about functional programming in Elixir, the general types of Elixir must be discussed. Elixir uses primitive types similar to Go but simpler by skipping the size option of numbers. Additionally, it has atoms, a feature of prolog that was passed over from Erlang to Elixir. Atoms are constant identifiers that have the same value as their name. 
 
 .types.ex
 [source,elixir]
@@ -219,7 +217,7 @@ tuple = {:red, :green, :blue}
 [discrete]
 ==== Modules and Functions
 
-Functions in Elixir can annonymous or inside a module. Elixir doesn't use curly brackets for distinquishing scopes. Instead keywords are used. Scopes are restricted by `do` and `end`.
+Functions in Elixir can be anonymous or inside a module. Elixir does not use curly brackets for distinquishing scopes. Instead keywords are used. Scopes are restricted by `do` and `end`.
 
 .types (functions)
 [source,elixir]
@@ -228,7 +226,7 @@ add = fn a, b -> a + b end
 add.(2, 2)
 ----
 
-Here the function `add` is defined as a annonymous function. These function use `\->` instead `do`. Calling the function is quite unusual by the need of a dot before the argument list in brackets. A very important quirk of Elixir is the absence of a return keyword. Every function annonymous and named return the last statement of the function. This is a big change and has some impact on development.
+Here the function `add` is defined as an anonymous function. Anonymous functions use `\->` instead `do`. Calling the function is quite unusual by the need of a dot before the argument list in brackets. A very important quirk of Elixir is the absence of a return keyword. Every anonymous and named function returns the last statement. This is a big change and has impact on development.
 
 .types.ex (modules)
 [source,elixir]
@@ -250,14 +248,14 @@ end
 Greeter.greet("World", "Here is Elixir")
 ----
 
-Only modules in Elixir are starting with a capital letter. Private functions are prefixed by the keyword `defp` while normal functions just use `def`. Elixir also allows the definition of structs using `defstruct`.
+Only modules in Elixir start with a capital letter. Private functions are prefixed by the keyword `defp` while normal functions just use `def`. Elixir also allows the definition of structs using `defstruct`.
 
 // < => vs -> vs |> >
 
 [discrete]
 ==== First-class citizens
 
-The previously defined annonymous function `add` and the following function increment are examples for assigning functions to variables. Function of modules of cannot be assigned to variables.
+The previously defined anonymous function `add` and the following function increment are examples for assigning functions to variables.
 
 .first_class_citizens (functions)
 [source,elixir]
@@ -283,7 +281,7 @@ multiplyC.(2).(2)
 
 == Comparison of Functional Programming
 
-Since modern programming languages have features of many types like object orientation or functional programming, programming languages can more precisly differentiated with orthogonal classifications. Just like Go that has C++ background Elixir builds on top of the language Erlang. Various orthogonal classifications are listed in the Table <<_orthogonal_classifications,Orthogonal Classifications>>. 
+Since modern programming languages have features of many paradigms like object-orientation or functional programming, they can be more precisly differentiated with orthogonal classifications. Just like Go that has C++ background Elixir builds on top of the language Erlang. Various orthogonal classifications are listed in the table <<_orthogonal_classifications,Orthogonal Classifications>>. 
 
 .Orthogonal Classifications
 |===
@@ -305,9 +303,10 @@ Since modern programming languages have features of many types like object orien
 |Platform Independent Bytecode
 |===
 
-Elixir in comparison to Go has dynamic types, meaning it will evaluate types at runtime. Elixir and Go have different types and typing approaches. Elixir for example does not have strict types. Much like languages like coffeescript types in Elixir can be added through annotations or decorators.
+Elixir in comparison to Go has dynamic types, meaning it evaluates types at runtime. Elixir and Go have different types and typing approaches. Elixir for example does not have strict types. Like in coffeescript types in Elixir can be added through annotations or decorators.
 
-Both Elixir and Go are compiled. But Go is compiled into one binary executable while Elixir is compiled into Beam files compatible to the ErlangVM. The pros and cons of each output are countless.
+Both Elixir and Go are compiled. Go is compiled into one binary executable while Elixir is compiled into Beam files, which are compatible to the Erlang VM. 
+// The pros and cons of each output are countless.
 
 // <Interactive Shell IEX.bat, .ex vs .exs>
 // <moduls, plugins, require, import>
@@ -333,10 +332,10 @@ Both Elixir and Go are compiled. But Go is compiled into one binary executable w
 === Lambda Calculus
 
 // <What is the lambda calculus?>
-The lambda calculus is logic also used in computer science. In the lambda calculus everything is a function. Numbers, if-statements and more computational tasks can be displayed in the lambda calculus via functions. Additionally all functions in the lambda calculus are unary.
+The lambda calculus is a logic language used in computer science. In the lambda calculus everything is a function. Numbers, if-statements and more computational tasks can be expressed in the lambda calculus via functions. All functions in the lambda calculus are unary.
 // <Connection to functional programming>
 
-In the following two examples three prominent functions of the lambda calculus are represented. The identify function `i` returns its argument. The function `t` displays a true statement. A false is implemented in `f`. 
+Three prominent functions of the lambda calculus are represented in the following two examples for Go and Elixir. The identity function `i` returns its argument. The function `t` expresses a `true`. A `false` is implemented in `f`. 
 
 .lambda_calculus.go
 [source,go]
@@ -378,7 +377,7 @@ i = fn x -> x end
 ----
 
 // <How is it implemented in Elixir?>
-The three functions identity, true and false share the similar concept in Elixir. But here they are much smaller. For once the functions are annonymous and `return` keywords are omitted. The absence of type information shortens the code even further.
+The three functions: identity, true and false share the similar concept in Elixir. But here they are much more compact. For once the functions are anonymous and `return` keywords are omitted. The absence of type information shortens the code even further.
 // <named unused arguments in Exlixir but not in go>
 
 === Example Application

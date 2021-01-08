@@ -8,8 +8,6 @@ Jonas Jahns
 
 == Introduction
 
-// To bring order into the chaos of immense amount of programming languages out there ,they can be classified by paradigsm.
-
 The numerous programming languages can be separated into different paradigms. Examples are object-oriented, procedural and functional programming, all of which can be done in Go and in Elixir: two modern programming languages that have similar usecases. Paradigms define how programms are developed. Many newer programming languages adopted features of other languages and are multi-paradigm. The main goal of this arcticle is to compare Go with Elixir regarding the paradigm of functional programming.
 
 === Functional Programming
@@ -21,20 +19,15 @@ ____
 Functional programming promotes a coding style that helps developers write code that is short, concise, and maintainable.
 ____
 
-Functional programming is defined by many concepts that differentiate it from other paradigms. One key concept is that functions are first-class citizens. First-class citizens of a programming language are treated equally to primitive types like strings or numbers. This means that a function can be a return type, assigned to variables and passed as arguments to functions. A very helpful concept is anonymous functions that can be directly assigned to a variable without prior declaration. 
+Functional programming is defined by many concepts that differentiate it from other paradigms. One key concept is that functions are *first-class citizens*. First-class citizens of a programming language are treated equally to primitive types like strings or numbers. This means that a function can be a return type, assigned to variables and passed as arguments to functions. A very helpful concept is *anonymous functions* that can be directly assigned to a variable without prior declaration. This leads to *closures* which are returned functions that contain local scoped variables. 
 
-Functional programming includes higher-order functions that can be called with a function as an argument, return a function or do both. 
-// <Composition,Closure, Currying, Higher Order>
-The arity of functions gives information about the number of arguments. Some functional concepts require functions only with arity one or unary. Unary functions are functions that only take one arugment. To implement functions with more arguments currying comes into play. Currying describes ...
+Functional programming includes *higher-order functions* that can be called with a function as an argument, return a function or do both. The arity of functions gives information about the number of arguments. Some functional concepts require functions only with arity one or unary. Unary functions are functions that only take one arugment. To implement functions with more arguments *currying* comes into play. Currying describes the process of splitting a function with multiple arguments into functions with one argument.
 
-// <What is lazy evaluation?>
-// <Immutable vars>
-// <Why are functional prog. lang. stateless? pros?>
-// <What are side effects?>
-Programming languages that only support some parts of functional programming or are not only functional are called pure. Pure functional programming does not support loops, if-else or switch statements. Instead these types of languages use recursion.
+Functional programming may also support the evaluation method *lazy evaluation*. lazy evalutated terms are for example not evalutated while iterating over lists of terms. Variables in functional programming languages are *immutable* which are only declared once and cannot be reassigned. One of the advantages of functional programming is the abundance of *side effects*. 
 
-Examples for functional programming languages are F# and Haskell. Functional programming languages have the effect of ...
-// <Functional Programming Languages Usescases>
+Programming languages that only support some parts of functional programming or are not only functional are called impure. Pure functional programming does not support loops, if-else or switch statements. Instead these types of languages use recursion.
+
+Examples for functional programming languages are F# and Haskell. Functional programming languages have the effect of being stateless, making them attractive for processing large datasets and concurrent programming.
 
 === Go
 
@@ -49,22 +42,14 @@ Go is more simple than C\++ since it has fewer keywords and has ditched pointer 
 
 === Elixir
 
-Elixir is also a multi-paradigm programming language. It was built on top of Erlang, a more functional programming language designed for telecommunication backends. Elixir therefore uses the Erlang VM. Erlang libraries can be used in Elixir. This was a key feature for the developers. Elixir is not pure functional since it has features like loops, switches and if-else statements. Even object-oriented programming is possible.
-
-// <What is OTP, Erlang?>
+Elixir is more functional than Go but also a multi-paradigm programming language. It was built on top of Erlang, a concurrent programming language designed for telecommunication backends. Elixir therefore uses the Erlang VM. Erlang libraries can be used in Elixir. This was a key feature for the developers. Elixir is not pure functional since it has features like loops, switches and if-else statements.
 
 [quote, https://elixir-lang.org]
 ____
 Elixir is a dynamic, functional language designed for building scalable and maintainable applications.
 ____
 
-Elixir has similar usecases to Go.
-// <usecase differences>
-Elixir can also be run on embedded hardware using Nerves which is an IoT platform. 
-// <Area>
-// <Fault tolerant, scaleable>
-
-Unlike Go Elixir requires a seperate build tool and package manager. The build tool of Elixir is called mix and it formats, runs tests, compiles and runs compiled Elixir source code. Mix is installed along the Elixir compiler.
+Elixir has similar usecases to Go. Elixir is used in the area of application development and distributed systems. Elixir can also be run on embedded hardware using Nerves which is an IoT platform. Elixir is fault tolerant. This means failed processes do not impact other processes and for this reason it is used for long running servers. Elixir uses the build tool Mix for creating applications. Elixir shares the package manager called hex with Erlang.
 
 == Functional Programming in Go
 
@@ -124,12 +109,12 @@ An anonymous function is stored in the variable add. The call of the anonymous l
 [discrete]
 ==== Higher-order functions
 
-Go functions can be higher-order, which include a function as a parameter, return a function or do both. The Go programming language does not support Javalike streams and the functional concepts map, filter and reduce. An example for a custom implementation for a streaming api is given in link:stream/stream.go[stream.go]. Only an extract is provided here. 
+Go functions can be higher-order, which include a function as a parameter, return a function or do both. An example for a custom implementation for a streaming api is given in. An extract of a custom stream api implemenation is provided in stream.go. 
 
 .stream.go
 [source, go]
 ----
-func (s StreamImpl) Filter(p func(a interface{}) bool) StreamImpl {
+func (s StreamImpl) Filter(p func(interface{}) bool) StreamImpl {
 	// ...
 }
 ----
@@ -137,7 +122,7 @@ func (s StreamImpl) Filter(p func(a interface{}) bool) StreamImpl {
 The function `Filter` takes an predicate function as an argument `p` that evaluates if an item of the stream should be skipped. The predicate function is defined by the `func` keyword. This predicate takes an `interface{}` which can be anything and returns a boolean.
 
 [discrete]
-==== Currying
+==== Currying and Closures
 
 Currying implies that higher-order functions exist and that functions can be returned from other functions. A curried function in Go can be implemented by returning a anonymous function.
 
@@ -160,12 +145,12 @@ func main() {
 }
 ----
 
-The curried function `multiplyC` can be called.
+The first call of the curried function `multiplyC` equals in the returned closure. This closure can now be seen as a function that multiplies a number with two.
 
 [discrete]
 ==== Composition
 
-With composing functions ...
+
 
 .composition.go
 [source, go]
@@ -187,8 +172,6 @@ func main() {
 	compose(square, square)(2)
 }
 ----
-
-// <How does Functional Programming with Go work?>
 
 == Functional Programming in Elixir
 
@@ -217,16 +200,16 @@ tuple = {:red, :green, :blue}
 [discrete]
 ==== Modules and Functions
 
-Functions in Elixir can be anonymous or inside a module. Elixir does not use curly brackets for distinquishing scopes. Instead keywords are used. Scopes are restricted by `do` and `end`.
+Functions in Elixir can be anonymous or inside a module. Elixir does not use curly brackets for distinquishing scopes. Scopes are restricted by the keywords `do` and `end`.
 
-.types (functions)
+.types.ex (functions)
 [source,elixir]
 ----
 add = fn a, b -> a + b end
 add.(2, 2)
 ----
 
-Here the function `add` is defined as an anonymous function. Anonymous functions use `\->` instead `do`. Calling the function is quite unusual by the need of a dot before the argument list in brackets. A very important quirk of Elixir is the absence of a return keyword. Every anonymous and named function returns the last statement. This is a big change and has impact on development.
+Here the function `add` is defined as an anonymous function. Anonymous functions use `\->` instead `do`. Elixir also uses the lambda arrow `|>` for piping variables and `\=>` for assinging values in maps to keys. Calling the function is quite unusual by the need of a dot before the argument list in brackets. A very important quirk of Elixir is the absence of a return keyword. Every anonymous and named function returns the last statement. This is a big change and has impact on development.
 
 .types.ex (modules)
 [source,elixir]
@@ -250,22 +233,38 @@ Greeter.greet("World", "Here is Elixir")
 
 Only modules in Elixir start with a capital letter. Private functions are prefixed by the keyword `defp` while normal functions just use `def`. Elixir also allows the definition of structs using `defstruct`.
 
-// < => vs -> vs |> >
-
 [discrete]
 ==== First-class citizens
 
 The previously defined anonymous function `add` and the following function increment are examples for assigning functions to variables.
 
-.first_class_citizens (functions)
+.first_class_citizens.ex
 [source,elixir]
 ----
 increment = fn x -> x + 1
 g = &Greeter.greet/2
 ----
 
+In Elixir functions from modules can also be assigned to variables but the arity has to be specified.
+
 [discrete]
-==== Currying
+==== Higher-order functions
+
+The Enum module of Elixir provides functionality for filter, map and reduce. These methods accept a function
+as a argument.
+
+.higher_order_functions.ex
+[source,elixir]
+----
+[1, 2, 3, "a"] |> Enum.filter(fn x -> is_number(x))
+----
+
+In this example the function `Enum.filter` gets an function determinating whether an element of an array is a number. The array gets piped as the first argument to the filter function.
+
+[discrete]
+==== Currying and Closure
+
+It is only a small step towards currying if higher-order functions and first-class citizens are valid. 
 
 .currying.ex
 [source,elixir]
@@ -331,7 +330,6 @@ Both Elixir and Go are compiled. Go is compiled into one binary executable while
 
 === Lambda Calculus
 
-// <What is the lambda calculus?>
 The lambda calculus is a logic language used in computer science. In the lambda calculus everything is a function. Numbers, if-statements and more computational tasks can be expressed in the lambda calculus via functions. All functions in the lambda calculus are unary.
 // <Connection to functional programming>
 
@@ -340,27 +338,26 @@ Three prominent functions of the lambda calculus are represented in the followin
 .lambda_calculus.go
 [source,go]
 ----
-type function func(function) function
+type f func(f) f
 
-func t(x function) function {
-	return func(y function) function {
+func t(x f) f {
+	return func(y f) f {
 		return x
 	}
 }
 
-func f(x function) function {
-	return func(y function) function {
+func f(x f) f {
+	return func(y f) f {
 		return y
 	}
 }
 
-func i(x function) function {
+func i(x f) f {
 	return x
 }
 ----
 
-// <How is it implemented in Go?>
-Go allows the declaration of custom types. The type `function` is defined as function that takes a `function` and returns a `function`.
+Go allows the declaration of custom types. The type `f` is defined as function that takes a `f` and returns a `f`.
 
 .lambda_calculus.ex
 [source,elixir]
@@ -376,7 +373,6 @@ end
 i = fn x -> x end
 ----
 
-// <How is it implemented in Elixir?>
 The three functions: identity, true and false share the similar concept in Elixir. But here they are much more compact. For once the functions are anonymous and `return` keywords are omitted. The absence of type information shortens the code even further.
 // <named unused arguments in Exlixir but not in go>
 

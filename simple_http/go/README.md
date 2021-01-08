@@ -19,5 +19,5 @@ Output:
 ## Start
 
 ```bash
-go run server.go
+go run simple_http.go
 ```

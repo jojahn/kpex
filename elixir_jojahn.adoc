@@ -23,7 +23,7 @@ Functional programming is defined by many concepts that differentiate it from ot
 
 Functional programming includes *higher-order functions* that can be called with a function as an argument, return a function or do both. The arity of functions gives information about the number of arguments. Some functional concepts require functions only with arity one or unary. Unary functions are functions that only take one arugment. To implement functions with more arguments *currying* comes into play. Currying describes the process of splitting a function with multiple arguments into functions with one argument.
 
-Functional programming may also support the evaluation method *lazy evaluation*. lazy evalutated terms are for example not evalutated while iterating over lists of terms. Variables in functional programming languages are *immutable* which are only declared once and cannot be reassigned. One of the advantages of functional programming is the abundance of *side effects*. 
+Functional programming may also support the evaluation method *lazy evaluation*. lazy evalutated terms are for example not evalutated while iterating over lists of terms. Data in functional programming languages is *immutable* which is only declared once and cannot be reassigned. One of the advantages of functional programming is the lack of *side effects*. Side effects exist if variables are modified out of their scope.  
 
 Programming languages that only support some parts of functional programming or are not only functional are called impure. Pure functional programming does not support loops, if-else or switch statements. Instead these types of languages use recursion.
 
@@ -150,7 +150,7 @@ The first call of the curried function `multiplyC` equals in the returned closur
 [discrete]
 ==== Composition
 
-
+Composition combines mutiple smaller functions to a more complex function.
 
 .composition.go
 [source, go]
@@ -172,6 +172,8 @@ func main() {
 	compose(square, square)(2)
 }
 ----
+
+Calling `compose` with `(square, square)` is equal to (x^2^)^2^. 
 
 == Functional Programming in Elixir
 
@@ -278,6 +280,27 @@ multiply.(2, 2)
 multiplyC.(2).(2)
 ----
 
+The curried function `multiplyC` achieves the same purpose as `multiply`. Every call of the curried function and the returned closure must be prefixed with a dot. 
+
+[discrete]
+==== Composition
+
+Composition is also available in Elixir. An example using anonymous functions follows.
+
+.composition.ex
+[source,elixir]
+----
+compose = fn f, g ->
+  fn value -> f.(g.(value)) end
+end
+
+square = fn x -> x * x end
+
+compose.(square, square).(2)
+----
+
+The `compose` function is also curried and higher-order but the focus is here on the two functions `square`. The second `square` is composed by the first `square`.
+
 == Comparison of Functional Programming
 
 Since modern programming languages have features of many paradigms like object-orientation or functional programming, they can be more precisly differentiated with orthogonal classifications. Just like Go that has C++ background Elixir builds on top of the language Erlang. Various orthogonal classifications are listed in the table <<_orthogonal_classifications,Orthogonal Classifications>>. 
@@ -304,29 +327,31 @@ Since modern programming languages have features of many paradigms like object-o
 
 Elixir in comparison to Go has dynamic types, meaning it evaluates types at runtime. Elixir and Go have different types and typing approaches. Elixir for example does not have strict types. Like in coffeescript types in Elixir can be added through annotations or decorators.
 
-Both Elixir and Go are compiled. Go is compiled into one binary executable while Elixir is compiled into Beam files, which are compatible to the Erlang VM. 
-// The pros and cons of each output are countless.
-
-// <Interactive Shell IEX.bat, .ex vs .exs>
-// <moduls, plugins, require, import>
-
-// <Why only Functional Features compared>
+Both Elixir and Go are compiled. Go is compiled into one binary executable while Elixir is compiled into Beam files, which are compatible to the Erlang VM. Each output has its pros and cons. Elixir comes with an interactive shell called iex. Interpreted Elixir source files end with `.exs` and compiled with `.ex`.
 
 .Functional Features
 |===
 | Feature | Go | Elixir
 
-| Pure | No | No
+| Pure | No | Yes/No
 | First-class citizens | Yes | Yes
 | Higher-order functions | Yes | Yes
-| Lazy evaluation | No | Partial
-| Side effects | Yes/No | Yes/No
-| Immutable variables | No | No
+| Currying | Yes | Yes
 | Composition | Yes | Yes
 | Closure | Yes | Yes
-| Currying | Yes | Yes
+| Immutable data | No | Yes
+| Lazy evaluation | No | Yes/No
+| Side effects | Yes/No | Yes/No
 
 |===
+
+It is unclear whether Elixir is a pure functional language. Higher-order functions, first-class citizens, closures, composition and currying is all possible in Go and in Elixir.
+
+Lazy evaluation is not supported by Elixir and Go. The Elixir list `[ 1/0, 2, 3 ]` and the Go array `[]int{ 1/0, 2, 3 }` fail while being evaluated. 
+
+The immutable data are not required in Go. Go allows for mutation but also has a `const` keyword for restricting reassignments. In contrast to Go Elixir has immutable data. 
+
+// <Side effects>
 
 === Lambda Calculus
 
@@ -338,26 +363,26 @@ Three prominent functions of the lambda calculus are represented in the followin
 .lambda_calculus.go
 [source,go]
 ----
-type f func(f) f
+type fn func(fn) fn
 
-func t(x f) f {
-	return func(y f) f {
+func t(x fn) fn {
+	return func(y fn) fn {
 		return x
 	}
 }
 
-func f(x f) f {
-	return func(y f) f {
+func f(x fn) fn {
+	return func(y fn) fn {
 		return y
 	}
 }
 
-func i(x f) f {
+func i(x fn) fn {
 	return x
 }
 ----
 
-Go allows the declaration of custom types. The type `f` is defined as function that takes a `f` and returns a `f`.
+Go allows the declaration of custom types. The type `fn` is defined as function that takes a `fn` and returns a `fn`.
 
 .lambda_calculus.ex
 [source,elixir]
@@ -373,85 +398,77 @@ end
 i = fn x -> x end
 ----
 
-The three functions: identity, true and false share the similar concept in Elixir. But here they are much more compact. For once the functions are anonymous and `return` keywords are omitted. The absence of type information shortens the code even further.
-// <named unused arguments in Exlixir but not in go>
+The three functions: identity, true and false share the similar concept in Elixir. But here they are much more compact. For once the functions are anonymous and `return` keywords are omitted. The absence of type information shortens the code even further. Elixir also has used named parameters.
 
 === Example Application
 
-Since Go and Elixir share the webserver usecase functional will be compared with an example application that represents a simple http server.
+Since Go and Elixir share the webserver usecase functional will be compared with an example application that represents a simple http server. This simple server should be able to parse a json request body.
 
-// <Compare HTTP server code structure>
-Go comes with a HTTP module
+Go comes with a HTTP module called `net/http`. The simple webserver can be implemented in a single file.
+
+simple_http.go
+[source,Go]
+----
+http.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
+	// ...
+})
+
+log.Fatal(http.ListenAndServe(":8080", nil))
+----
+
+`http.HandleFunc` handles GET requests for "localhost:8080/hello". `http.ListenAndServe` starts the servers main loop.
+
+simple_http.go
+[source,Go]
+----
+var result map[string]interface{}
+json.Unmarshal([]byte(body), &result)
+----
+
+While parsing the json body immutable data occur since the unmarshal function changes the parsing result pointer value after initialization.
+
+Elixir needs an external package for HTTP communication. There multiple projects for this available but the most common ones are Cowboy and Phoenix. To install external packages it is required to create an application using mix. A mix application consists of multiple files.
+
+[source,bash]
+----
+├─── mix.exs #dependencies and more
+├─── test/ #tests
+└─── lib/ #src
+     └─── simple_http #application root
+    	  ├─── application.ex #main
+    	  └─── router.ex #router
+----
+
+
+application.ex
+[source,Elixir]
+----
+defmodule SimpleHttp.Application do
+  use Application
+
+  def start(_type, _args) do
+    children = [
+      {Plug.Cowboy, scheme: :http, plug: SimpleHttp.Router, options: [port: 8080]}
+    ]
+    Supervisor.start_link(children)
+  end
+end
+----
+
+The application module starts the server with the plug in router.ex on port 8080. The requests are handled in the plug.
+
+router.ex
+[source,Elixir]
+----
+get "/hello" do
+	conn
+	|> put_resp_content_type("application/json", "utf-8")
+	|> send_resp(200, processName(extractNameFromBody(conn.body_params)))
+end
+----
+
+Being stateless functional programming leads to encapsulation of functions. Writing an HTTP response may be considered as a side effect since the state is modified outside the local scope.
+
+Elixir and Go are both efficient modern programming languages ideal for backends and servers. Although Elixir is more functional than Go. Go is a more procedural than functional programing language.  
 
 // <[Compare HTTP request responsetimes]>
-
-// == ASCII DOC EX
-
-// This is a paragraph with a *bold* word and an _italicized_ word.
-
-// .Image caption
-// image::image-file-name.png[I am the image alt text.]
-
-// This is another paragraph.footnote:[I am footnote text and will be displayed at the bottom of the article.]
-
-// .Unordered list title
-// * list item 1
-// ** nested list item
-// *** nested nested list item 1
-// *** nested nested list item 2
-// * list item 2
-
-// This is a paragraph.
-
-// .Example block title
-// ====
-// Content in an example block is subject to normal substitutions.
-// ====
-
-// .Sidebar title
-// ****
-// Sidebars contain aside text and are subject to normal substitutions.
-// ****
-
-// [#id-for-listing-block]
-// .Listing block title
-// ----
-// Content in a listing block is subject to verbatim substitutions.
-// Listing block content is commonly used to preserve code input.
-// ----
-
-// .Table title
-// |===
-// |Column heading 1 |Column heading 2
-
-// |Column 1, row 1
-// |Column 2, row 1
-
-// |Column 1, row 2
-// |Column 2, row 2
-// |===
-
-// [quote, firstname lastname, movie title]
-// ____
-// I am a block quote or a prose excerpt.
-// I am subject to normal substitutions.
-// ____
-
-// [verse, firstname lastname, poem title and more]
-// ____
-// I am a verse block.
-//   Indents and endlines are preserved in verse blocks.
-// ____
-
-// TIP: There are five admonition labels: Tip, Note, Important, Caution and Warning.
-
-// // I am a comment and won't be rendered.
-
-// . ordered list item
-// .. nested ordered list item
-// . ordered list item
-
-// The text at the end of this sentence is cross referenced to <<_third_level_heading,the third level heading>>
-
-// This is a link to the https://asciidoctor.org/docs/user-manual/[Asciidoctor User Manual].
-// This is an attribute reference {quick-uri}[which links this text to the Asciidoctor Quick Reference Guide].

@@ -37,18 +37,18 @@ ____
 Go is an open-source programming language that makes it easy to build simple, reliable, and efficient software.
 ____
 
-Go is simpler than C since it has fewer keywords and has ditched pointer arithmetic. Go shines as the programming language for the backbone of the cloud native stack. It is used in the area of application programming for cloud and the web. Other areas of Go are network and distributed systems. Go is used in web servers and cloud infrastructure. It was not developed as a UI language but there still exist GTK and QT bindings for it. Go can also be used in embedded devices using the compiler TinyGo which is optimized for microcontrollers.
+Go is simpler than C since it has fewer keywords and has ditched pointer arithmetic. Go shines as the programming language for the backbone of the cloud native stack. It is used in the area of application programming. Other areas of Go are network and distributed systems. Go is used in web servers and cloud infrastructure. It was not developed as a UI language but there exist GTK and QT bindings for it. Go can also be used in embedded devices using the compiler TinyGo which is optimized for microcontrollers.
 
 === Elixir
 
-Elixir is a functional programming language. It was built on top of Erlang, a concurrent programming language designed for telecommunication backends. Elixir therefore uses the Erlang VM. Erlang libraries can be used in Elixir. This was a key feature for the developers. Elixir may be considered not pure functional since it has features like for-loops and if-else statements. Side effects may also occur.
+Elixir is a functional programming language. It was built on top of Erlang, a concurrent programming language designed for telecommunication backends. Elixir therefore uses the Erlang VM. Erlang libraries can be used in Elixir. This was a key feature for the developers. Elixir may not be considered pure functional since it has features like for-loops and if-else statements. Side effects may also occur.
 
 [quote, https://elixir-lang.org]
 ____
 Elixir is a dynamic, functional language designed for building scalable and maintainable applications.
 ____
 
-Elixir has similar use cases to Go. It is used in the area of application development and distributed systems. Elixir can also be run on embedded hardware using Nerves which is an IoT platform. Elixir is fault tolerant. This means failed processes do not impact other processes and for this reason, it is used for long running servers. Elixir uses the build tool Mix for creating applications. Elixir shares the package manager called hex with Erlang.
+Elixir has similar use cases to Go. It is used in the area of application development and distributed systems. Elixir can also be run on embedded hardware using Nerves which is an IoT platform. Elixir is fault tolerant. This means failed processes do not impact other processes and for this reason, it is used for long running services. Elixir uses the build tool mix for creating applications. Elixir shares the package manager called hex with Erlang.
 
 == Functional Programming in Go
 

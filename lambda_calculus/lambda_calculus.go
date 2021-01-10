@@ -31,7 +31,7 @@ func m(x function) function {
 
 func a(x function) function {
 	return func(y function) function {
-		return x(y)(t)
+		return x(y)(f)
 	}
 }
 

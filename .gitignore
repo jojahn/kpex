@@ -21,3 +21,6 @@
 # vendor/
 
 elixir_jojahn.pdf
+
+# IntelliJ/Goland
+.idea/workspace.xml

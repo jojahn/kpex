@@ -22,7 +22,7 @@ Functional programming is defined by many concepts that differentiate it from ot
 
 Functional programming includes *higher-order functions* that can be called with a function as an argument, return a function or do both. The arity of functions gives information about the number of arguments. Some functional concepts require functions only with arity one or unary. Unary functions are functions that only take one argument. To implement functions with more arguments *currying* comes into play. Currying describes the process of splitting a function with multiple arguments into functions with one argument.
 
-Functional programming may also support the evaluation method *lazy evaluation*. Lazy evalutated terms are for example not evalutated while iterating over lists of terms. Data in functional programming languages is *immutable* which is only declared once and cannot be reassigned, changed or modified. One of the advantages of functional programming is the lack of *side effects*. Side effects exist if variables are modified out of their scope.  
+Data in functional programming languages is *immutable* which is only declared once and cannot be reassigned, changed or modified. One of the advantages of functional programming is the lack of *side effects*. Side effects exist if variables are modified out of their scope.  
 
 Programming languages that only support some parts of functional programming or are not only functional are called impure. Pure functional programming does not support loops, if-else or switch statements. Instead these types of languages use recursion.
 
@@ -136,10 +136,8 @@ func multiplyC(a int) func(int) int {
 	}
 }
 
-func main() {
-	multiply(2, 2)
-	multiplyC(2)(2)
-}
+multiply(2, 2)
+multiplyC(2)(2)
 ----
 
 The first call of the curried function `multiplyC` equals in the returned closure. This closure can now be seen as a function that multiplies a number with two.
@@ -164,9 +162,7 @@ func square(x interface{}) interface{} {
 	return x.(int) * x.(int)
 }
 
-func main() {
-	compose(square, square)(2)
-}
+compose(square, square)(2)
 ----
 
 Calling `compose` with `(square, square)` is equal to (x^2^)^2^.
@@ -235,9 +231,7 @@ The previously defined anonymous function `add` and the following function `incr
 [source,elixir]
 ----
 increment = fn x -> x + 1
-increment.(1)
 g = &Greeter.greet/2
-g.("World", "Here is Elixir")
 ----
 
 In Elixir functions from modules can also be assigned to variables but the arity has to be specified.
@@ -265,6 +259,7 @@ It is only a small step towards currying if higher-order functions and first-cla
 [source,elixir]
 ----
 multiply = fn x, y -> x * y end
+
 multiplyC = fn x ->
     fn y -> x * y end
 end
@@ -313,16 +308,12 @@ Elixir in comparison to Go has dynamic types, meaning it evaluates types at runt
 
 Both Elixir and Go are compiled. Go is compiled into one binary executable while Elixir is compiled into Beam files, which are compatible to the Erlang VM. Each output has its pros and cons. Elixir comes with an interactive shell called iex. Interpreted Elixir source files end with `.exs` and compiled with `.ex`.
 
-.Feature Classification
+.Functional Features
 |===
 | Feature | Go | Elixir
 
 | Pure | No | Yes/No
-| First-class citizens, Higher-order functions, Currying | Yes | Yes
-| Higher-order functions | Yes | Yes
-| Currying | Yes | Yes
-| Composition | Yes | Yes
-| Closure | Yes | Yes
+| First-class citizens, Higher-order functions, Currying, Composition, Closures | Yes | Yes
 | Immutable data | No | Yes
 | Lazy evaluation | No | Yes/No
 | Side effects | Yes/No | Yes/No
@@ -331,9 +322,11 @@ Both Elixir and Go are compiled. Go is compiled into one binary executable while
 
 It is unclear whether Elixir is a pure functional language. Higher-order functions, first-class citizens, closures, composition and currying is all possible in Go and in Elixir.
 
-Lazy evaluation is not supported by Elixir and Go. The Elixir list `[ 1/0, 2, 3 ]` and the Go array `[]int{ 1/0, 2, 3 }` fail while being evaluated. 
+Functional programming may also support the evaluation method *lazy evaluation*. Lazy evalutated terms are for example not evalutated while iterating over lists of terms. Lazy evaluation is not supported by Elixir and Go. The Elixir list `[ 1/0, 2, 3 ]` and the Go array `[]int{ 1/0, 2, 3 }` fail while being evaluated. 
 
-The immutable data are not required in Go. Go allows for mutation but also has a `const` keyword for restricting reassignments. In contrast to Go Elixir has immutable data. 
+The immutable data are not required in Go. Go allows for mutation but also has a `const` keyword for restricting reassignments. In contrast to Go Elixir has immutable data.
+
+Functional programming is all about avoiding side effects.
 
 === Lambda Calculus
 
